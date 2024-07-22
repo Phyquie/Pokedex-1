@@ -8,7 +8,6 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Skeleton } from '@mui/material';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -18,11 +17,11 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
   '& .MuiDialog-paper': {
-    transition: 'transform 0.3s ease-in-out'
+    transition: 'transform 0.3s ease-in-out',
   },
 }));
 
-export default function Pokemonitem({ pokemon, loading, infoPokemon, data }) {
+export default function Pokemonitem({ pokemon, loading, infoPokemon }) {
   const [open, setOpen] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
@@ -78,12 +77,6 @@ export default function Pokemonitem({ pokemon, loading, infoPokemon, data }) {
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
                 open={open}
-                BackdropProps={{
-                  style: {
-                    backgroundColor: 'rgba(0, 0, 0, 0)',
-                    backdropFilter: 'blur(1px)',
-                  },
-                }}
               >
                 <DialogTitle sx={{ m: 0, p: 2, textAlign: "center" }} id="customized-dialog-title">
                   <img

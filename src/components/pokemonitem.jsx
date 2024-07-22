@@ -18,7 +18,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
   '& .MuiDialog-paper': {
-    transition: 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out',
+    transition: 'transform 0.3s ease-in-out'
   },
 }));
 

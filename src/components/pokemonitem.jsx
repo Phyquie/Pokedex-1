@@ -18,13 +18,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
   '& .MuiDialog-paper': {
     transition: 'transform 0.3s ease-in-out',
-    margin: 0,
-    width: '100%',
-    maxWidth: '600px',
-    height: '100%',
-    maxHeight: '90vh',
-    display:'flex',
-    alignItems: 'center'
+    
   },
 }));
 
@@ -84,6 +78,13 @@ export default function Pokemonitem({ pokemon, loading, infoPokemon }) {
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
                 open={open}
+                BackdropProps={{
+                  style: {
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    backdropFilter: 'blur(1px)',
+                  },
+                }}
+
               >
                 <DialogTitle sx={{ m: 0, p: 2, textAlign: "center" }} id="customized-dialog-title">
                   <div

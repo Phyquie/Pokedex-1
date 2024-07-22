@@ -18,6 +18,13 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
   '& .MuiDialog-paper': {
     transition: 'transform 0.3s ease-in-out',
+    margin: 0,
+    width: '100%',
+    maxWidth: '600px',
+    height: '100%',
+    maxHeight: '90vh',
+    display:'flex',
+    alignItems: 'center'
   },
 }));
 
@@ -79,12 +86,20 @@ export default function Pokemonitem({ pokemon, loading, infoPokemon }) {
                 open={open}
               >
                 <DialogTitle sx={{ m: 0, p: 2, textAlign: "center" }} id="customized-dialog-title">
-                  <img
-                    src={selectedPokemon?.sprites.other.home.front_default}
-                    style={{ width: '300px', height: '300px' }}
-                    alt={selectedPokemon?.name}
-                  />
-                  <strong className='uppercase'>{selectedPokemon?.name}</strong>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <img
+                      src={selectedPokemon?.sprites.other.home.front_default}
+                      style={{ width: '300px', height: '300px' }}
+                      alt={selectedPokemon?.name}
+                    />
+                    <strong className='uppercase'>{selectedPokemon?.name}</strong>
+                  </div>
                 </DialogTitle>
                 <IconButton
                   aria-label="close"

@@ -61,7 +61,9 @@ function App() {
   const router=createBrowserRouter([
     {
       path:"/",
-      element:<div className="App bg-yellow-200">
+      element:
+      <body class="m-0 p-0 h-full w-full">
+      <div className="fixed w-screen h-screen bg-yellow-200 overflow-auto">
       <Header onTransfer={handleDataTransfer}/>
       <div className="container mx-auto p-5">
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center'>
@@ -76,6 +78,7 @@ function App() {
         </Button>}
       </div>
     </div>
+    </body>
     },
     {
       path:"/search",

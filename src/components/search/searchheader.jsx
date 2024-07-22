@@ -45,11 +45,13 @@ export default function HeaderSearch({onName}) {
   const [newinputData, setnewInputData] = useState('');
 
   const handleChange = (event) => {
-    setnewInputData(event.target.value);
-    console.log(newinputData)
+    let Captitalsearch = event.target.value
+    setnewInputData(Captitalsearch.toLowerCase());
+    console.log(Captitalsearch)
   };
 
   const handlenewkeydown=(event)=>{
+    
     if(event.key==='Enter'){
       //console.log(event.key)
       onName(newinputData);

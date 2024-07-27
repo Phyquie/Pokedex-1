@@ -82,31 +82,33 @@ navigate('/search');
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: 'red' }}>
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{
-              flexGrow: 1,
-              display: { xs: 'block', sm: 'block' },
-              overflow: 'visible',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            <img src={logo} alt="h" className='h-10 w-40' />
-          </Typography>
-         <SearchIcon onClick={handleonclick}/>
-            
-            <Search sx={{ minWidth: 200 }}>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-                onChange={handleChange}
-                value={inputData}
-                onKeyDown={handlekeydown}
-              />
-            </Search>
-          
+          <div className='flex flex-col items-center justify-center w-full'>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                flexGrow: 1,
+                display: { xs: 'block', sm: 'block' },
+                overflow: 'visible',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <img src={logo} alt="h" className='h-30 w-80' />
+            </Typography>
+            <div className='flex items-center justify-center w-full'>
+              <SearchIcon onClick={handleonclick} />
+              <Search sx={{ minWidth: 200 }}>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ 'aria-label': 'search' }}
+                  onChange={handleChange}
+                  value={inputData}
+                  onKeyDown={handlekeydown}
+                />
+              </Search>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
     </Box>

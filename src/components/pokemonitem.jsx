@@ -1,40 +1,55 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import Typography from '@mui/material/Typography';
+import CustomPopup from './CustomPopup'; // Import custom popup component
 import CircularProgress from '@mui/material/CircularProgress';
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(2),
-  },
-  '& .MuiDialogActions-root': {
-    padding: theme.spacing(1),
-  },
-  '& .MuiDialog-paper': {
-    transition: 'transform 0.3s ease-in-out',
-    
-  },
-}));
-
-export default function Pokemonitem({ pokemon, loading, infoPokemon }) {
+export default function Pokemonitem({ pokemon, loading, infoPokemon, onPopupOpen, onPopupClose }) {
+  const typeColors = {
+    fire: '#F08030',
+    water: '#6890F0',
+    grass: '#78C850',
+    electric: '#F8D030',
+    ice: '#98D8D8',
+    fighting: '#C03028',
+    poison: '#A040A0',
+    ground: '#E0C068',
+    flying: '#A890F0',
+    psychic: '#F85888',
+    bug: '#A8B820',
+    rock: '#B8A038',
+    ghost: '#705898',
+    dragon: '#7038F8',
+    dark: '#705848',
+    steel: '#B8B8D0',
+    fairy: '#EE99AC',
+    normal: '#A8A878',
+  };
   const [open, setOpen] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   const handleClose = () => {
     setOpen(false);
+    onPopupClose();  
+  };
+
+  const handleOpen = (item) => {
+    setOpen(true);
+    setSelectedPokemon(item);
+    infoPokemon(item);
+    onPopupOpen();  
   };
 
   return (
     <>
       {loading ? (
-        <div className='flex justify-center items-center text-center'>
-          <CircularProgress />
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh', 
+          width: '100vw',  
+        }}>
+          <CircularProgress size={60} />
         </div>
       ) : (
         pokemon.map((item) => (
@@ -43,19 +58,15 @@ export default function Pokemonitem({ pokemon, loading, infoPokemon }) {
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: 'purple',
+                  backgroundColor: typeColors[item.types[0].type.name],
                   borderRadius: '1.5rem',
                   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
                   '&:hover': {
-                    backgroundColor: '#8B008B',
-                    boxShadow: '0px 6px 10px rgba(0, 0, 0, 0.15)',
+                    backgroundColor: typeColors[item.types[0].type.name], // Maintain the same color on hover
+                    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Ensure the box shadow is consistent
                   },
                 }}
-                onClick={() => {
-                  setOpen(true);
-                  setSelectedPokemon(item);
-                  infoPokemon(item);
-                }}
+                onClick={() => handleOpen(item)}
                 className="rounded-3xl"
               >
                 <div
@@ -69,71 +80,18 @@ export default function Pokemonitem({ pokemon, loading, infoPokemon }) {
                   <img
                     src={item.sprites.other.home.front_default}
                     alt={item.name}
-                    style={{ width: '150px', height: '150px', marginBottom: '8px' }}
+                    style={{ width: '150px', height: '150px', marginBottom: '2px' }}
                   />
                   <strong>{item.name}</strong>
+                  <p>{item.types[0].type.name}</p>
                 </div>
               </Button>
-              <BootstrapDialog
-                onClose={handleClose}
-                aria-labelledby="customized-dialog-title"
-                open={open}
-                BackdropProps={{
-                  style: {
-                    backgroundColor: 'rgba(0, 0, 0, 0)',
-                    backdropFilter: 'blur(1px)',
-                  },
-                }}
 
-              >
-                <DialogTitle sx={{ m: 0, p: 2, textAlign: "center" }} id="customized-dialog-title">
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <img
-                      src={selectedPokemon?.sprites.other.home.front_default}
-                      style={{ width: '300px', height: '300px' }}
-                      alt={selectedPokemon?.name}
-                    />
-                    <strong className='uppercase'>{selectedPokemon?.name}</strong>
-                  </div>
-                </DialogTitle>
-                <IconButton
-                  aria-label="close"
-                  onClick={handleClose}
-                  sx={{
-                    position: 'absolute',
-                    right: 8,
-                    top: 8,
-                    color: (theme) => theme.palette.grey[500],
-                  }}
-                >
-                  <CloseIcon />
-                </IconButton>
-                <DialogContent dividers>
-                  <Typography gutterBottom>
-                    Type: {selectedPokemon?.types[0].type.name}
-                    <br />
-                    Height: {selectedPokemon?.height}
-                    <br />
-                    Weight: {selectedPokemon?.weight}
-                    <br />
-                    HP: {selectedPokemon?.stats[0].base_stat}
-                    <br />
-                    Defense: {selectedPokemon?.stats[1].base_stat}
-                    <br />
-                    Attack: {selectedPokemon?.stats[2].base_stat}
-                    <br />
-                    Special Attack: {selectedPokemon?.stats[3].base_stat}
-                    <br />
-                    Speed: {selectedPokemon?.stats[5].base_stat}
-                  </Typography>
-                </DialogContent>
-              </BootstrapDialog>
+              <CustomPopup
+                open={open}
+                onClose={handleClose}
+                selectedPokemon={selectedPokemon}
+              />
             </React.Fragment>
           </div>
         ))

@@ -6,6 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
+import logo from '../images/Pokédex_logo.png';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from "react-router-dom";
@@ -14,7 +15,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useState } from 'react';
 
 const Search = styled('div')(({ theme }) => ({
-  position: 'elative',
+  position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
@@ -30,8 +31,8 @@ const Search = styled('div')(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
-  width: '100%',
-  '&.MuiInputBase-input': {
+  width: '80%',
+  '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
@@ -41,54 +42,59 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function HeaderSearch({onName}) {
+export default function HeaderSearch({ onName }) {
   const [newinputData, setnewInputData] = useState('');
 
   const handleChange = (event) => {
-    let Captitalsearch = event.target.value
+    let Captitalsearch = event.target.value;
     setnewInputData(Captitalsearch.toLowerCase());
-    console.log(Captitalsearch)
+    console.log(Captitalsearch);
   };
 
-  const handlenewkeydown=(event)=>{
-    
-    if(event.key==='Enter'){
-      //console.log(event.key)
-      onName(newinputData);
+  const handlenewkeydown = (event) => {
+    if (event.key === 'Enter') {
+      if (newinputData !== '') onName(newinputData);
     }
-  }
- 
+  };
+
+  const Magnifier = (newinputData) => {
+    if (newinputData !== '') onName(newinputData);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: 'red' }}>
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{
-              flexGrow: 1,
               display: { xs: 'block', sm: 'block' },
-              overflow: 'visible',
-              whiteSpace: 'nowrap',
             }}
           >
-            <Link to="/"><Button variant="outline" startIcon={<ArrowBackIosIcon />}/></Link>
+            <Link to="/">
+              <Button variant="outline" startIcon={<ArrowBackIosIcon />} />
+            </Link>
           </Typography>
-          <IconButton >
-            <SearchIcon onClick={()=>onName(newinputData)}/>
+          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div className='flex flex-col'>
+            <img src={logo} alt="Pokédex Logo" className='h-30 w-80' />
+            <Search sx={{ minWidth: 100, marginLeft: 2 }}>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={handleChange}
+                value={newinputData}
+                onKeyDown={handlenewkeydown}
+              />
+              <IconButton onClick={() => Magnifier(newinputData)}>
+                <SearchIcon />
+              </IconButton>
+            </Search>
+            </div>
             
-          </IconButton>
-          <Search sx={{ minWidth: 200 }}>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'earch' }}
-              onChange={handleChange}
-              value={newinputData}
-              onKeyDown={handlenewkeydown}
-            />
-          </Search>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

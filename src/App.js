@@ -12,7 +12,7 @@ import Searchitem from './components/search/searchitem';
 function App() {
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=15");
+  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=50");
   const [nextUrl, setNextUrl] = useState();
   const [prevUrl, setPrevUrl] = useState();
   const [pokeDex, setPokeDex] = useState([]);

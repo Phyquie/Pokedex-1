@@ -40,6 +40,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       
     },
   },
+  '&:hover': {
+    boxShadow: `0 0 0 3px ${theme.palette.primary.main}33`, // Semi-transparent ring effect
+    borderRadius: '10px', // Match the border radius to your input style
+  },
+  transition: 'box-shadow 0.3s ease'
 }));
 
 export default function Header({onTransfer}) {
@@ -105,6 +110,7 @@ navigate('/search');
                   onChange={handleChange}
                   value={inputData}
                   onKeyDown={handlekeydown}
+
                 />
               </Search>
             </div>

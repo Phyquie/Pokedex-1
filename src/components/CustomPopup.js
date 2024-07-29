@@ -5,29 +5,53 @@ import './CustomPopup.css'; // Custom styles
 const CustomPopup = ({ open, onClose, selectedPokemon }) => {
   if (!open) return null;
 
+  const typeColors = {
+    fire: '#F08030',
+    water: '#6890F0',
+    grass: '#78C850',
+    electric: '#F8D030',
+    ice: '#98D8D8',
+    fighting: '#C03028',
+    poison: '#A040A0',
+    ground: '#E0C068',
+    flying: '#A890F0',
+    psychic: '#F85888',
+    bug: '#A8B820',
+    rock: '#B8A038',
+    ghost: '#705898',
+    dragon: '#7038F8',
+    dark: '#705848',
+    steel: '#B8B8D0',
+    fairy: '#EE99AC',
+    normal: '#A8A878',
+  };
+
   return (
     <div className="custom-popup-overlay">
       <div className="custom-popup">
         <button className="custom-popup-close" onClick={onClose}>X</button>
         <div className="custom-popup-content ">
-         <div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
          <img
             src={selectedPokemon?.sprites.other.home.front_default}
             style={{
               width: '100%',
-              maxWidth: '300px',
+              maxWidth: '200px',
               height: 'auto',
             }}
             alt={selectedPokemon?.name}
-          /></div> 
+          /> </div>
           <strong
-            className="custom-popup-title"
+            className="custom-popup-title capitalize"
           >
             {selectedPokemon?.name}
           </strong>
-          <div style={{ fontSize: '18px', color: '#555' }}>
-            <strong>Type:</strong> {selectedPokemon?.types[0].type.name}
-          </div>
+          <div style={{ fontSize: '18px', color: '#555', display:'flex', justifyContent:'center' }}>
+            <strong>Type:</strong><div className="type" style={{ color: typeColors[selectedPokemon?.types[0].type.name] }}>
+            {selectedPokemon?.types[0].type.name}</div>
+            
+             {selectedPokemon?.types[1] &&   <div className="type" style={{ color: typeColors[selectedPokemon?.types[1].type.name] }}> <strong className='text-slate-950'>/</strong>  {selectedPokemon?.types[1].type.name}</div>}</div> 
+          
           <div style={{ fontSize: '18px', color: '#555', marginTop: '10px' }}>
             <strong>Height:</strong> {selectedPokemon?.height}
           </div>
@@ -83,7 +107,7 @@ const ProgressWithLabel = ({ value, type }) => {
   
   const filledWidth = (value / 120) * 100;
   return (
-    <div style={{ position: 'relative', width: '100%', height: '24px', borderRadius: '12px', overflow: 'hidden', backgroundColor: `${typeColors[type]}33` }}>
+    <div style={{ position: 'relative', width: '100%', height: '20px', borderRadius: '12px', overflow: 'hidden', backgroundColor: `${typeColors[type]}33` }}>
       <div
         style={{
           width: `${filledWidth}%`,

@@ -31,15 +31,21 @@ const Search = styled('div')(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
-  width: '80%',
+  width: '100%',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
+      
     },
   },
+  '&:hover': {
+    boxShadow: `0 0 0 3px ${theme.palette.primary.main}33`, // Semi-transparent ring effect
+    borderRadius: '10px', // Match the border radius to your input style
+  },
+  transition: 'box-shadow 0.3s ease'
 }));
 
 export default function HeaderSearch({ onName }) {
@@ -80,17 +86,22 @@ export default function HeaderSearch({ onName }) {
           <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <div className='flex flex-col'>
             <img src={logo} alt="Pokédex Logo" className='h-30 w-80' />
-            <Search sx={{ minWidth: 100, marginLeft: 2 }}>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-                onChange={handleChange}
-                value={newinputData}
-                onKeyDown={handlenewkeydown}
-              />
-              <IconButton onClick={() => Magnifier(newinputData)}>
-                <SearchIcon />
-              </IconButton>
+            <Search sx={{ maxWidth: 224, marginLeft: 2 }}>
+            <div className='flex'>
+            <IconButton onClick={() => Magnifier(newinputData)}>
+              
+              <SearchIcon />
+            </IconButton>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+              onChange={handleChange}
+              value={newinputData}
+              onKeyDown={handlenewkeydown}
+            />
+            </div>
+           
+              
             </Search>
             </div>
             

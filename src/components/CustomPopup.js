@@ -47,14 +47,15 @@ const CustomPopup = ({ open, onClose, selectedPokemon }) => {
             {selectedPokemon?.name}
           </strong>
           <div style={{ fontSize: '18px', color: '#555', display:'flex', justifyContent:'center' }}>
-            <strong>Type:</strong><div className="type" style={{ color: typeColors[selectedPokemon?.types[0].type.name] }}>
+            <strong>Type:</strong><div className="type capitalize" style={{ color: typeColors[selectedPokemon?.types[0].type.name] }}>
             {selectedPokemon?.types[0].type.name}</div>
             
-             {selectedPokemon?.types[1] &&   <div className="type" style={{ color: typeColors[selectedPokemon?.types[1].type.name] }}> <strong className='text-slate-950'>/</strong>  {selectedPokemon?.types[1].type.name}</div>}</div> 
+             {selectedPokemon?.types[1] &&   <div className="type capitalize" style={{ color: typeColors[selectedPokemon?.types[1].type.name] }}> <strong className='text-slate-950'>/</strong>  {selectedPokemon?.types[1].type.name}</div>}</div> 
           
-          <div style={{ fontSize: '18px', color: '#555', marginTop: '10px' }}>
-            <strong>Height:</strong> {selectedPokemon?.height}
-          </div>
+             <div style={{ fontSize: '18px', color: '#555', marginTop: '10px' }}>
+  <strong>Height:</strong> {selectedPokemon?.height ? (selectedPokemon.height / 10) : 'N/A'} m
+</div>
+
           <div className="progress-bar">
             <div className="progress-bar-section">
               <span>HP:</span>

@@ -24,6 +24,27 @@ export default function Pokemonitem({ pokemon, loading, infoPokemon, onPopupOpen
     fairy: '#EE99AC',
     normal: '#A8A878',
   };
+
+  const fadedTypeColors = {
+    fire: '#F5A064',
+    water: '#99B3F2',
+    grass: '#9FD181',
+    electric: '#FAD970',
+    ice: '#B6E4E4',
+    fighting: '#D36660',
+    poison: '#B06CB0',
+    ground: '#E8D397',
+    flying: '#C1ADEF',
+    psychic: '#F98BAA',
+    bug: '#C2CD73',
+    rock: '#CAB669',
+    ghost: '#9081A8',
+    dragon: '#8C6BF9',
+    dark: '#908081',
+    steel: '#CBCBD6',
+    fairy: '#F1B0BD',
+    normal: '#C2C2A9',
+  };
   const [open, setOpen] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
@@ -58,12 +79,12 @@ export default function Pokemonitem({ pokemon, loading, infoPokemon, onPopupOpen
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: typeColors[item.types[0].type.name],
+                  backgroundColor: fadedTypeColors[item.types[0].type.name],
                   borderRadius: '1.5rem',
                   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
                   '&:hover': {
-                    backgroundColor: typeColors[item.types[0].type.name], // Maintain the same color on hover
-                    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Ensure the box shadow is consistent
+                    backgroundColor: typeColors[item.types[0].type.name], 
+                    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', 
                   },
                 }}
                 onClick={() => handleOpen(item)}

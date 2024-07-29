@@ -68,10 +68,10 @@ function App() {
     {
       path: "/",
       element: (
-        <body className="m-0 p-0 h-full w-full">
+        <body className="m-0 p-0 h-full w-full ">
           <div className="fixed w-screen h-screen overflow-auto">
             <Header onTransfer={handleDataTransfer} />
-            <div className='bg-slate-100 rounded-3xl'>
+            <div className=' rounded-3xl'>
               <div className="container mx-auto p-1">
                 <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-0.1 text-center'>
                   <Pokemonitem
